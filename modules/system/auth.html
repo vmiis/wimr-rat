@@ -1,0 +1,73 @@
+<div id=D__ID>
+    <script>
+        function F__ID(){
+            var app_id="wimr";
+            //--------------------------------------------------------
+            var u=window.location.origin;
+            if(u=="http://localhost:8000") u=u+"/auth.html";
+            else u=u+"/wimr-snapforms/auth.html"
+            $vm.auth_signin=function(){
+                url='https://login.microsoftonline.com/common/oauth2/v2.0/authorize';
+                url+='?client_id=3bcb40c5-fec0-4b3b-ba67-f4d46d577f97'; //woolcock
+                url+='&response_type=code';
+                url+='&redirect_uri='+u;
+                url+='&scope=openid user.read profile'; 
+                url+='&response_mode=fragment';
+                url+='&state=exchange-microsoft3-token.'+app_id;
+                url+='&nonce=678910';
+                url+='&prompt=select_account';
+                window.open(url);
+            }
+            //--------------------------------------------------------
+            $vm.auth_signout=function(){
+                sessionStorage.clear();
+                window.location.href=$vm.hosting_path+"/";
+            }
+            //------------------------------------
+            window.onmessage=function(e){
+                if (e.origin == window.location.origin){
+                    var href=e.data.href;
+                    if(href==undefined) return;
+                    var code=href.split('code=').pop();
+                    code=code.split('&')[0];
+	                var state=href.split('state=exchange').pop();
+	                state="exchange"+state.split('&')[0];
+	                state=state.split('#')[0];
+                    if(code!=undefined && state!=undefined){
+                        var cmd=state.split('.')[0];
+                        var id=state.split('.').pop();
+                        $vm.request_token(id,cmd,code,u,href,function(id,res){
+                            var api_name=id.split('_')[0];
+                            $vm.user_name=sessionStorage.getItem(api_name+" username");
+                            $vm.displayname=sessionStorage.getItem(api_name+" displayname");
+                            $vm.show_user();
+                        });
+                    }
+                }
+            }
+            $vm.init(function(){
+                $vm.init_status=1;
+                if(sessionStorage.getItem(app_id+" username")!=null)     $vm.user_name=sessionStorage.getItem(app_id+" username");
+                if(sessionStorage.getItem(app_id+" displayname")!=null)  $vm.displayname=sessionStorage.getItem(app_id+" displayname");
+                $vm.show_user();
+            })
+            //------------------------------------
+            $vm.request_token=function(id,cmd,code,redirect_uri,href,callback){
+                $vm.request({api:app_id,cmd:cmd,token:code,redirect_uri:redirect_uri},function(res){
+                    if(res.status=='ok'){
+                        sessionStorage.setItem(app_id+" username",res.result.user_name);
+                        sessionStorage.setItem(app_id+" displayname",res.result.displayname);
+                        sessionStorage.setItem(app_id+" token",res.result.token);
+                        sessionStorage.setItem("vm_token",res.result.token);
+                        sessionStorage.setItem(app_id+" tokens",JSON.stringify(res.result.tokens));
+                        sessionStorage.setItem(app_id+" tokens expire",new Date(new Date().getTime()+res.result.tokens.expires_in*1000).toLocaleString());
+                        $vm.user_name=sessionStorage.getItem(app_id+" username");
+                        $vm.displayname=sessionStorage.getItem(app_id+" displayname");
+                        callback(app_id);
+                    }
+                })
+            }
+            //------------------------------------
+        }
+    </script>
+</div>

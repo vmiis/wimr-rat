@@ -1,0 +1,61 @@
+<section>
+    VmInclude:__COMPONENT__/g/grid.01.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__COMPONENT__/g/grid.01.js
+        $('#new__ID').hide();
+        $('#import__ID').hide();
+        //-------------------------------------
+        var fields=`
+            Date of Test,
+            Test Result,
+            Patient Name,
+            Patient Surname,
+            Date of Birth,
+            Treating Clinician|Treating Clinician at The Woolcock,
+            Test Administered,
+            Batch Number,
+            Expiry Date,
+            Staff Dec - Training,
+            Staff Dec - Patient Check,
+            Staff Dec - Consent,
+            Staff Name,
+            Position Title,
+            Patient Dec - Consent,
+            Patient Dec - Result,
+            Patient Dec - Positive,
+            Patient Dec - Register,
+            Patient Dec - Sample,
+            Sample Method,
+            Route of Administration,
+            Patient Dec - Date,
+            Time of sample collection,
+            Time of buffer application,
+            Time of results review
+        `;
+        m.fields="_Form,"+fields+",Submit_date,Submitted_by";
+        //-------------------------------------
+        m.create_header=function(){
+            var cols=m.fields.split(',');
+            m.field_header=[];
+            m.field_id=[];
+            //------------------------------------
+            //table
+            for(var i=0;i<cols.length;i++){
+                var th=cols[i];
+                var thA=th.split('|')[0];
+                var thB=th.split('|').pop().trim();//.replace(/ /g,'_');
+                //create grid header and id
+                m.field_header.push(thA);
+                m.field_id.push(thB);
+            }
+            //-------------------------
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/g/grid.01.css
+</style>

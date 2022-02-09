@@ -1,0 +1,201 @@
+<div id=D__ID>
+    <section id=form_container__ID bp=576 style='display:flow-root;'>
+        <div class=header__ID>
+            <h1 class=t1__ID>Rapid Antigen Test</h1>
+        </div>
+    	<form id=F__ID>
+			<div class=r__ID>
+				<div w='100|50'>
+					<span><b>Date of Test</b></span>
+					<input type=text name="Date of Test" ></input>
+				</div>
+				<div w='100|50'>
+					<span><b>Test Result</b></span>
+					<input type=text name="Test Result" ></input>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100'>
+					<span><b>Details</b></span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|33.3'>
+					<input type="text" name="Patient Name" />
+                    <span class=t4__ID>Patient First Name</span>
+				</div>
+				<div w='100|33.3'>
+					<input type=text name="Patient Surname"></input>
+                    <span class=t4__ID>Patient Surname</span>
+				</div>
+				<div w='100|33.3'>
+					<input type=text name="Date of Birth"></input>
+                    <span class=t4__ID>Date of Birth</span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|100'>
+					<input type=text name="Treating Clinician at The Woolcock" ></input>
+                    <span class=t4__ID>Treating Clinician at The Woolcock</span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|33'>
+					<input type="text" name="Test Administered" />
+                    <span class=t4__ID>Test Administered</span>
+				</div>
+				<div w='100|33'>
+					<input type=text name="Batch Number"></input>
+                    <span class=t4__ID>Batch Number</span>
+				</div>
+				<div w='100|33'>
+					<input type=text name="Expiry Date"></input>
+                    <span class=t4__ID>Expiry Date</span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100'>
+					<span><b>Staff Declaration</b></span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|100'>
+					<ul style='list-style-type:none'>
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Training" Value="Yes"  /><span></span> I have participated in the training provided and am capable to administer this test.</label></li>						
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Patient Check"  Value="Yes" /><span></span> I have confirmed the patient's identity before continuing with the test.</label></li>
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Consent"  Value="Yes" /><span></span> I have explained the purpose of the rapid antigen test and have obtained the patient's consent to proceed.</label></li>
+					</ul>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|50'>
+					<input type="text" name="Staff Name" />
+                    <span class=t4__ID>Full Name</span>
+				</div>
+				<div w='100|50'>
+					<input type=text name="Position Title"></input>
+                    <span class=t4__ID>Position Title</span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100'>
+					<span><b>Patient Declaration</b></span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|100'>
+					<ul style='list-style-type:none'>
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Training" Value="Yes"  /><span></span> I consent to the rapid antigen test being administered at The Woolcock Institute for the purposes of staff and patient safety.</label></li>						
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Patient Check"  Value="Yes" /><span></span>  I consent to the records of my test being kept by The Woolcock Institue.</label></li>
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Consent"  Value="Yes" /><span></span> If the supervising staff member informs me that my test is positive, I accept that my appointment cannot continue as planned.</label></li>
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Patient Check"  Value="Yes" /><span></span>  If the supervising staff member informs me that my test is positive, I accept that it is my responsibility to follow all advice from NSW Health, including the need to register my positive rapid antigent test.</label></li>
+						<li><label class=c__ID><input type="checkbox" name="Staff Dec - Consent"  Value="Yes" /><span></span> I consent to the test being performed in the following manner:</label></li>
+					</ul>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|50'>
+					<input type="text" name="Sample Method" />
+                    <span class=t4__ID>Sample Method</span>
+				</div>
+				<div w='100|50'>
+					<input type=text name="Route of Administration"></input>
+                    <span class=t4__ID>Route of Administration</span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|100'>
+					<input type="text" name="Patient Dec - Date" />
+                    <span class=t4__ID>Patient Declaration Date</span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100'>
+					<span><b>Test Details</b></span>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|33'>
+					<input type="text" name="Time of sample collection" />
+                    <span class=t4__ID>Time of sample collection</span>
+				</div>
+				<div w='100|33'>
+					<input type=text name="Time of buffer application"></input>
+                    <span class=t4__ID>Time of buffer application</span>
+				</div>
+				<div w='100|33'>
+					<input type=text name="Time of results review"></input>
+                    <span class=t4__ID>Time of results review</span>
+				</div>
+			</div>
+            <div style='padding:15px'>&nbsp;</div>
+    	</form>
+    </section>
+	VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(){
+    		//-------------------------------------
+			VmInclude:__COMPONENT__/f/form.01.js
+			new ResizeObserver($vm.responsive).observe(form_container__ID);
+			m.storage_type='s0';
+			//-------------------------------------
+		}
+        $vm.deserialize=function(record,form_id){
+            if(record==undefined || record.Data==undefined) return;
+            $.each(record.Data, function(name, value){
+                if(name!=''){
+                    var $els = $(form_id+' *[name="'+name+'"]');
+                    $els.each(function(){
+                        var $el=$(this);
+                        var type = $el.attr('type');
+                        switch(type){
+                            case 'checkbox':
+                                if(value=='off' || value=='0' || value=='' || value==undefined ) $el.prop('checked', false);
+                                else $el.prop('checked', true);
+                                break;
+                            case 'radio':
+                                if($el.attr('value')==value){
+                                    $el.prop('checked', true);
+                                }
+                                break;
+                            case 'file':
+                                break;
+                            case 'text':
+                            case 'email':
+                            case 'textarea':
+                            case 'select':
+                                $el.val(value);
+                                break;
+                            case 'undefined':
+                                break;
+                            default:
+                                var type1=$(this).prop('nodeName');
+                                switch(type1){
+                                    case "SELECT":
+                                        $vm.add_value_to_select($el,value);
+                                        $el.val(value);
+                                        break;
+                                    case "TEXTAREA":
+                                        $el.val(value); 
+                                        break;
+                                    default: 
+                                        console.log(type+"---"+type1)				
+                                        $el.val(value); 
+                                        break;
+                                }
+                                break;
+                        }
+                    });
+                }
+            });
+        }
+
+
+    </script>
+    <style>
+        #form_container__ID{
+            max-width:1000px;
+        }
+		/*VmInclude:__CURRENT_PATH__form.css*/
+    </style>
+</div>
