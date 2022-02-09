@@ -37,6 +37,28 @@
         `;
         m.fields="_Form,"+fields+",Submit_date,Submitted_by";
         //-------------------------------------
+        m.cell_render=function(records,I,field,td){
+            switch(field){
+                case 'Staff Dec - Training':
+                case 'Staff Dec - Patient Check':
+                case 'Staff Dec - Consent':
+                case 'Patient Dec - Consent':
+                case 'Patient Dec - Result':
+                case 'Patient Dec - Positive':
+                case 'Patient Dec - Register':
+                case 'Patient Dec - Sample':
+                    if(records[I].Data[field]=='Yes'){
+                        td.html("<i style='color:green;padding-left:10px;cursor:pointer' class='fas fa-check' ></i>");
+                    }
+                    break;
+                case 'Test Result':
+                if(records[I].Data[field]=='Positive'){
+                        td.css("background-color","red");
+                    }
+                    break;
+            }
+        }
+        //-------------------------------------
         m.create_header=function(){
             var cols=m.fields.split(',');
             m.field_header=[];
@@ -52,6 +74,67 @@
                 m.field_id.push(thB);
             }
             //-------------------------
+        }
+        //-------------------------------------
+        m.render=function(){
+            var start=0;
+            var max=m.records.length;
+            for(var i=start;i<max;i++){
+                if(m.records[i].DateTime!==undefined){
+                    m.records[i].DateTime=m.records[i].DateTime.substring(0,10);
+                }
+                //if(m.records[i].vm_dirty===undefined) m.records[i].vm_dirty=0;
+                //if(m.records[i].vm_custom===undefined) m.records[i].vm_custom={};
+                //if(m.records[i].vm_readonly===undefined) m.records[i].vm_readonly={};
+            }
+
+            var txt="";
+            txt+="<tr><th></th>"
+            //-------------------------
+            m.create_header();
+            //-------------------------
+            for(var i=0;i<m.field_header.length;i++){
+                var print='';
+                var header_name=m.field_header[i];
+                if(m.field_header[i][0]=='_'){
+                    print='class=c_print';
+                    header_name=header_name.replace('_','');
+                }
+                header_name=header_name.replace(/_/g,' ');
+                var header_id=m.field_id[i];
+                if(m.field_header[i]=='_Form')        txt+="<th "+print+" data-header='"+header_id+"'></th>";
+                else if(m.field_header[i]=='_Delete') txt+="<th "+print+" data-header='"+header_id+"' style='width:30px;'></th>";
+                else                                  txt+="<th "+print+" data-header='"+header_id+"' >"+header_name+"</th>";
+            }
+            txt+"</tr>";
+            for(var i=0;i<m.records.length;i++){
+                txt+="<tr><td>"+(i+1).toString()+"</td>";
+                for(var j=0;j<m.field_header.length;j++){
+                    var b=m.field_id[j];
+                    var value="";
+                    if(m.records[i][b]!==undefined){
+                        value=m.records[i][b];
+                        //if(b=="Submit_date") value=$vm.date_to_ddmmyyyy(value.substring(0,10));
+                        if(b=="Submit_date") value=new Date(value).toLocaleDateString(window.navigator.userLanguage || window.navigator.language);
+                    }
+                    else{
+                        if(m.records[i]['Data']!=undefined && m.records[i]['Data'][b]!==undefined){
+                            value=m.records[i]['Data'][b];
+                        }
+                    }
+                    if(value==undefined) value="";
+                    value=value.toString();
+                    value=$('<div/>').text(value).html();
+                    value=value.replace(/\n/g,'<br>').replace(/\r/g,'');
+                    var print='';
+                    if(m.field_header[j][0]=='_') print='class=c_print';
+                    txt+="<td data-id="+b+" "+print+" >"+value+"</td>";
+                }
+                txt+="</tr>";
+            }
+            $('#grid__ID').html(txt);
+            //------------------------------------
+            m.cell_process();
         }
         //-------------------------------------
     }
