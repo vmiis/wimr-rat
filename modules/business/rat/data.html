@@ -11,11 +11,12 @@
         var fields=`
             Date of Test,
             Test Result,
+            Subject,
             Patient Name,
             Patient Surname,
-            Date of Birth,
+            Date of Birth|DOB,
+            Age,
             Treating Clinician|Treating Clinician at The Woolcock,
-            Test Administered,
             Batch Number,
             Expiry Date,
             Staff Dec - Training,
@@ -28,8 +29,8 @@
             Patient Dec - Positive,
             Patient Dec - Register,
             Patient Dec - Sample,
-            Sample Method,
-            Route of Administration,
+            Sample method,
+            Sample taken by,
             Patient Dec - Date,
             Time of sample collection,
             Time of buffer application,
@@ -51,8 +52,14 @@
                         td.html("<i style='color:green;padding-left:10px;cursor:pointer' class='fas fa-check' ></i>");
                     }
                     break;
+                /*
+                case 'Date of Birth':
+                    if(records[I].Data[field]==undefined){
+                        td.text(records[I].Data['DOB']);
+                    }
+                    */
                 case 'Test Result':
-                if(records[I].Data[field]=='Positive'){
+                    if(records[I].Data[field]=='Positive'){
                         td.css("background-color","red");
                     }
                     break;
