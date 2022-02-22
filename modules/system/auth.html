@@ -49,7 +49,7 @@
                 $vm.init_status=1;
                 if(sessionStorage.getItem(app_id+" username")!=null)     $vm.user_name=sessionStorage.getItem(app_id+" username");
                 if(sessionStorage.getItem(app_id+" displayname")!=null)  $vm.displayname=sessionStorage.getItem(app_id+" displayname");
-                $vm.show_user();
+                if($vm.show_user!=undefined) $vm.show_user();
             })
             //------------------------------------
             $vm.request_token=function(id,cmd,code,redirect_uri,href,callback){
